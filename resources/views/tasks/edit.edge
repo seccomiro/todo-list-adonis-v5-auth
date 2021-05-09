@@ -1,0 +1,21 @@
+@layout('layout/app')
+
+@section('content')
+  <h1>Editando Tarefa</h1>
+  <form action="{{ route('tasks.update', { id: task.id, qs: { _method: 'PATCH' } }) }}" method="POST">
+    <div>
+      <label for="title">Título</label>
+      <input type="text" name="title" id="title" value="{{ task.title }}">
+    </div>
+    <div>
+      <label for="description">Descrição</label>
+      <input type="text" name="description" id="description" value="{{ task.description || '' }}">
+    </div>
+    <div>
+      <button type="submit">Atualizar</button>
+    </div>
+  </form>
+  <div>
+    <a href="{{ route('tasks.index') }}">Voltar</a>
+  </div>
+@endsection
