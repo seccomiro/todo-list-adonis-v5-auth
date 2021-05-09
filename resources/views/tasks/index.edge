@@ -1,28 +1,33 @@
 @layout('layout/app')
 
 @section('content')
-  <h1>Tasks</h1>
-  <a href="{{ route('tasks.create') }}">Nova Tarefa</a>
-  <ul>
+  <h2>Suas Tarefas</h2>
+  <a href="{{ route('tasks.create') }}" class="btn btn-primary">Nova Tarefa</a>
+  <ul class="list-group mt-3">
     @each(task in tasks)
-      <li>
-        <a href="{{ route('tasks.show', { id: task.id }) }}">
-          @if(task.done)
-            <del>{{ task.title }}</del>
-          @else
-            {{ task.title }}
-          @endif
-        </a>
-        <a href="{{ route('tasks.done', { id: task.id }) }}">[X]</a>
-        <a href="{{ route('tasks.edit', { id: task.id }) }}">Editar</a>
-        <form
-          style="display: inline;"
-          method="post"
-          action="{{
-            route('tasks.destroy', { id: task.id, qs: { _method: 'DELETE' } })
-          }}">
-            <button type="submit">Apagar</button>
-        </form>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="title">
+        @if(task.done)
+          <del>{{ task.title }}</del>
+        @else
+          {{ task.title }}
+        @endif
+        </div>
+        <div class="actions">
+          <a href="{{ route('tasks.show', { id: task.id }) }}" class="btn btn-primary">Visualizar</a>
+          <a href="{{ route('tasks.done', { id: task.id }) }}" class="btn btn-primary">
+            {{ task.done ? 'Desfazer' : 'Fazer' }}
+          </a>
+          <a href="{{ route('tasks.edit', { id: task.id }) }}" class="btn btn-primary">Editar</a>
+          <form
+            style="display: inline;"
+            method="post"
+            action="{{
+              route('tasks.destroy', { id: task.id, qs: { _method: 'DELETE' } })
+            }}">
+              <button type="submit" class="btn btn-primary">Apagar</button>
+          </form>
+        </div>
       </li>
     @endeach
   </ul>

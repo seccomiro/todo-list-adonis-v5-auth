@@ -1,17 +1,15 @@
 @layout('layout/app')
 
 @section('content')
-  <h1>Nova Tarefa</h1>
+  <h2>Nova Tarefa</h2>
   <form action="{{ route('tasks.store') }}" method="POST">
-    <div>
-      <label for="title">Título</label>
-      <input type="text" name="title" id="title">
+    <div class="mb-3">
+      <label for="title" class="form-label">Título</label>
+      <input class="form-control" type="text" name="title" id="title">
     </div>
     <div>
-      <button type="submit">Cadastrar</button>
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      <a href="{{ route('tasks.index') }}" class="btn btn-link">Voltar</a>
     </div>
   </form>
-  <div>
-    <a href="{{ route('tasks.index') }}">Voltar</a>
-  </div>
 @endsection
